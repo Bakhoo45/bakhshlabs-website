@@ -1,0 +1,21 @@
+Contact: mailto:contact@bakhshlabs.me
+Contact: https://www.linkedin.com/in/muhammad-bakhsh-834865302
+Expires: 2026-08-04T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://bakhshlabs.me/.well-known/security.txt
+
+# Security Policy for Bakhsh Labs
+# 
+# If you discover a security vulnerability, please report it responsibly.
+# We appreciate your efforts to improve the security of our services.
+#
+# Please include:
+# - Description of the vulnerability
+# - Steps to reproduce
+# - Potential impact
+# - Suggested remediation (if any)
+#
+# We will respond to valid reports within 48 hours.
+
+Policy: https://bakhshlabs.me/security-policy
+Acknowledgments: https://bakhshlabs.me/security-acknowledgments

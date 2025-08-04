@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+Disallow: /assets/js/
+Disallow: /.git/
+Disallow: /node_modules/
+Disallow: /private/
+Disallow: /admin/
+Disallow: /config/
+
+# Security: Block common attack vectors
+Disallow: /wp-admin/
+Disallow: /wp-content/
+Disallow: /phpmyadmin/
+Disallow: /.env
+Disallow: /backup/
+Disallow: /backups/
+
+# Performance: Crawl-delay for bots
+Crawl-delay: 1
+
+# Sitemap (add when available)
+# Sitemap: https://yourdomain.com/sitemap.xml
