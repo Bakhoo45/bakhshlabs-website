@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     'use strict';
     
-    // Security: Validate localStorage availability and prevent XSS
     const isLocalStorageAvailable = (() => {
         try {
             const test = 'test';
@@ -12,8 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return false;
         }
     })();
-    
-    // Security: Sanitize input function
     function sanitizeInput(str) {
         if (typeof str !== 'string') return '';
         return str.replace(/[<>'"&]/g, function(match) {
@@ -36,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
-    // Security: Safe localStorage access with validation
     function getStoredTheme() {
         if (!isLocalStorageAvailable) return null;
         try {
@@ -81,7 +77,6 @@ document.addEventListener('DOMContentLoaded', function() {
         setStoredTheme(newTheme);
         updateThemeIcon(newTheme);
         
-        // Smooth theme transition
         document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
         setTimeout(() => {
             document.body.style.transition = '';
@@ -114,7 +109,6 @@ document.addEventListener('DOMContentLoaded', function() {
         hamburger.classList.toggle('active');
         navMenu.classList.toggle('active');
         
-        // Update aria attributes for accessibility
         const isActive = hamburger.classList.contains('active');
         hamburger.setAttribute('aria-expanded', isActive);
         navMenu.setAttribute('aria-hidden', !isActive);
@@ -129,7 +123,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Security: Prevent event bubbling issues
     document.addEventListener('click', function(e) {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             hamburger.classList.remove('active');
@@ -139,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Enhanced Smooth Scrolling with Section Focus
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -147,13 +139,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = document.querySelector(targetId);
             
             if (target) {
-                // Add smooth transition class to all sections
                 const allSections = document.querySelectorAll('section');
                 allSections.forEach(section => {
                     section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 });
                 
-                // Fade out non-target sections
                 allSections.forEach(section => {
                     if (section.id !== targetId.substring(1)) {
                         section.style.opacity = '0.3';
@@ -161,23 +151,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     }
                 });
                 
-                // Calculate offset for smooth positioning
-                const offsetTop = target.offsetTop - 80; // Account for fixed navbar with extra space
+                const offsetTop = target.offsetTop - 80;
                 
-                // Smooth scroll to target
                 window.scrollTo({
                     top: offsetTop,
                     behavior: 'smooth'
                 });
                 
-                // After scrolling, restore all sections with delay
                 setTimeout(() => {
                     allSections.forEach(section => {
                         section.style.opacity = '1';
                         section.style.transform = 'scale(1)';
                     });
                     
-                    // Remove transition after animation completes
                     setTimeout(() => {
                         allSections.forEach(section => {
                             section.style.transition = '';
@@ -188,14 +174,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Navbar Scroll Effect
     const navbar = document.querySelector('.navbar');
     let lastScrollTop = 0;
     
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
         
-        // Add/remove backdrop blur based on scroll position
         if (scrollTop > 50) {
             navbar.style.background = 'rgba(255, 255, 255, 0.9)';
             if (document.documentElement.getAttribute('data-theme') === 'dark') {
@@ -211,11 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScrollTop = scrollTop;
     });
     
-    // Enhanced Active Navigation Link Highlighting
     const sections = document.querySelectorAll('section[id]');
     
     function highlightNavLink() {
-        const scrollPos = window.scrollY + 120; // Adjusted for better detection
+        const scrollPos = window.scrollY + 120;
         let activeSection = null;
         
         sections.forEach(section => {
@@ -228,7 +211,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Update navigation links
         document.querySelectorAll('.nav-link').forEach(link => {
             link.classList.remove('active');
             const href = link.getAttribute('href');
@@ -240,7 +222,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     window.addEventListener('scroll', highlightNavLink);
     
-    // Intersection Observer for Animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -254,12 +235,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Observe elements for animation
     document.querySelectorAll('.service-card, .project-card, .tech-item, .stat').forEach(el => {
         observer.observe(el);
     });
     
-    // Typing Animation for Hero Title
     function typeWriter(element, text, speed = 100) {
         let i = 0;
         element.innerHTML = '';
@@ -274,12 +253,10 @@ document.addEventListener('DOMContentLoaded', function() {
         type();
     }
     
-    // Initialize typing animation for hero elements
     const heroName = document.querySelector('.hero-title .name');
     const heroBrand = document.querySelector('.hero-title .brand');
     
     if (heroName && heroBrand) {
-        // Add a slight delay before starting the animation
         setTimeout(() => {
             typeWriter(heroName, 'Muhammed Bakhsh', 80);
             setTimeout(() => {
@@ -288,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 500);
     }
     
-    // Parallax Effect for Hero Section
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const hero = document.querySelector('.hero');
@@ -300,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Smooth Counter Animation for Stats
     function animateCounters() {
         const counters = document.querySelectorAll('.stat-number');
         
@@ -322,7 +297,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Trigger counter animation when stats section is visible
     const statsSection = document.querySelector('.about-stats');
     if (statsSection) {
         const statsObserver = new IntersectionObserver(function(entries) {
@@ -337,7 +311,6 @@ document.addEventListener('DOMContentLoaded', function() {
         statsObserver.observe(statsSection);
     }
     
-    // Image Lazy Loading Enhancement
     const images = document.querySelectorAll('img[loading="lazy"]');
     
     const imageObserver = new IntersectionObserver(function(entries) {
@@ -345,13 +318,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 const img = entry.target;
                 
-                // Check if image is already loaded
                 if (img.complete && img.naturalHeight !== 0) {
-                    // Image already loaded, show it immediately
                     img.style.opacity = '1';
                     img.style.transition = 'opacity 0.3s ease';
                 } else {
-                    // Image not loaded yet, set up loading transition
                     img.style.opacity = '0';
                     img.style.transition = 'opacity 0.3s ease';
                     
@@ -359,7 +329,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         img.style.opacity = '1';
                     };
                     
-                    // Fallback: show image after a short delay even if onload doesn't fire
                     setTimeout(() => {
                         if (img.style.opacity === '0') {
                             img.style.opacity = '1';
@@ -374,16 +343,13 @@ document.addEventListener('DOMContentLoaded', function() {
     
     images.forEach(img => imageObserver.observe(img));
     
-    // Keyboard Navigation Support
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            // Close mobile menu on Escape
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         }
     });
     
-    // Performance: Debounce scroll events
     function debounce(func, wait) {
         let timeout;
         return function executedFunction(...args) {
@@ -396,40 +362,32 @@ document.addEventListener('DOMContentLoaded', function() {
         };
     }
     
-    // Apply debouncing to scroll events
     const debouncedScrollHandler = debounce(highlightNavLink, 100);
     window.removeEventListener('scroll', highlightNavLink);
     window.addEventListener('scroll', debouncedScrollHandler);
     
-    // Contact Form Enhancement (if needed in future)
     function initializeContactForm() {
         const form = document.querySelector('#contact-form');
         if (form) {
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                // Add form submission logic here
                 console.log('Contact form submitted');
             });
         }
     }
     
-    // Initialize contact form if present
     initializeContactForm();
     
-    // Page Load Performance Monitoring
     window.addEventListener('load', function() {
         const loadTime = performance.now();
         console.log(`Page loaded in ${Math.round(loadTime)}ms`);
         
-        // Remove any loading indicators
         document.body.classList.add('loaded');
     });
     
-    // Security: Enhanced error handling for images with rate limiting
     const failedImages = new Set();
     const MAX_RETRIES = 2;
     
-    // Security: Monitor for potential security issues
     const securityMonitor = {
         suspiciousActivity: 0,
         maxSuspiciousActions: 10,
@@ -452,29 +410,23 @@ document.addEventListener('DOMContentLoaded', function() {
                 failedImages.add(src);
                 console.warn(`Failed to load image: ${sanitizeInput(src)}`);
                 
-                // Security: Log potential image-based attacks
                 if (src.includes('<script>') || src.includes('javascript:')) {
                     securityMonitor.logSuspiciousActivity('Malicious image src detected', src);
                 }
             }
             
-            // Hide broken images gracefully
             this.style.opacity = '0';
             this.style.transition = 'opacity 0.3s ease';
             
-            // Add error class for CSS styling
             this.classList.add('image-error');
             
-            // Optional: Add fallback image or placeholder
             this.alt = 'Image unavailable';
         });
         
-        // Security: Validate image sources
         if (img.src && !img.src.startsWith(window.location.origin) && !img.src.startsWith('data:')) {
             console.warn(`External image detected: ${sanitizeInput(img.src)}`);
         }
         
-        // Security: Monitor for suspicious image manipulations
         img.addEventListener('load', function() {
             if (this.naturalWidth === 0 || this.naturalHeight === 0) {
                 securityMonitor.logSuspiciousActivity('Suspicious image dimensions', this.src);
@@ -482,7 +434,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Security: Content Security Policy violation reporting
     document.addEventListener('securitypolicyviolation', function(e) {
         securityMonitor.logSuspiciousActivity('CSP Violation', {
             violatedDirective: e.violatedDirective,
@@ -491,12 +442,10 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Add resize handler for responsive adjustments
     let resizeTimer;
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            // Close mobile menu on resize
             if (window.innerWidth > 768) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
