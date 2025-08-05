@@ -1,12 +1,24 @@
 User-agent: *
 Allow: /
+
+# Allow specific bots
+User-agent: bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+# Disallow unnecessary paths
 Disallow: /assets/js/
 Disallow: /.git/
 Disallow: /node_modules/
 Disallow: /private/
 Disallow: /admin/
 Disallow: /config/
-
 Disallow: /wp-admin/
 Disallow: /wp-content/
 Disallow: /phpmyadmin/
@@ -14,4 +26,5 @@ Disallow: /.env
 Disallow: /backup/
 Disallow: /backups/
 
-Crawl-delay: 1
+# Sitemap location
+Sitemap: https://bakhshlabs.me/sitemap.xml

@@ -1,8 +1,22 @@
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
+
+.service-card,
+.project-card,
+.tech-item,
+.btn,
+.nav-link,
+.hero-content {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+
 .nav-logo,
 .theme-toggle,
 .hamburger {
@@ -11,13 +25,25 @@
     -ms-user-select: none;
     user-select: none;
 }
+
 img {
     -webkit-user-drag: none;
     -khtml-user-drag: none;
     -moz-user-drag: none;
     -o-user-drag: none;
     pointer-events: auto;
+    
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    max-width: 100%;
+    height: auto;
 }
+
+
+.logo-icon {
+    image-rendering: auto !important;
+}
+
 img.image-error {
     opacity: 0.3;
     filter: grayscale(100%);
@@ -65,20 +91,17 @@ body {
         --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
         --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
     }
-}
 
-[data-theme="dark"] {
-    --bg-color: #0f172a;
-    --text-color: #f8fafc;
-    --text-secondary: #94a3b8;
-    --primary-color: #60a5fa;
-    --primary-hover: #3b82f6;
-    --secondary-color: #1e293b;
-    --border-color: #334155;
-    --card-bg: #1e293b;
-    --shadow-light: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-    --shadow-medium: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
-    --shadow-large: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    .navbar {
+        background: rgba(15, 23, 42, 0.95);
+    }
+
+    .nav-container {
+        background: rgba(30, 41, 59, 0.8);
+        border-radius: 0.5rem;
+        margin: 0.5rem auto;
+        max-width: 1180px;
+    }
 }
 
 .container {
@@ -97,16 +120,7 @@ body {
     transition: all 0.3s ease;
 }
 
-[data-theme="dark"] .navbar {
-    background: rgba(15, 23, 42, 0.95);
-}
 
-[data-theme="dark"] .nav-container {
-    background: rgba(30, 41, 59, 0.8);
-    border-radius: 0.5rem;
-    margin: 0.5rem auto;
-    max-width: 1180px;
-}
 
 .nav-container {
     max-width: 1200px;
@@ -137,6 +151,9 @@ body {
     width: 32px;
     height: 32px;
     transition: transform 0.3s ease;
+    display: inline-block;
+    flex-shrink: 0;
+    vertical-align: middle;
 }
 
 .nav-logo a:hover .logo-icon {
@@ -424,6 +441,13 @@ section:not(.hero) {
     margin: 0 auto 1.5rem;
     font-size: 2rem;
     color: white;
+}
+
+.service-icon i {
+    font-size: 2rem;
+    color: white;
+    line-height: 1;
+    text-align: center;
 }
 
 .service-card h3 {
