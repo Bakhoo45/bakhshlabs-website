@@ -15,41 +15,35 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const navLinks = document.querySelectorAll('.nav-link');
+    const floatingNavbar = document.querySelector('.floating-navbar');
+    const navItems = document.querySelectorAll('.nav-item');
     
-    if (!hamburger || !navMenu) {
-        console.warn('Navigation elements not found');
+    if (!floatingNavbar) {
+        console.warn('Floating navbar not found');
         return;
     }
-    
-    hamburger.addEventListener('click', function(e) {
-        e.preventDefault();
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-        
-        const isActive = hamburger.classList.contains('active');
-        hamburger.setAttribute('aria-expanded', isActive);
-        navMenu.setAttribute('aria-hidden', !isActive);
-    });
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-            navMenu.setAttribute('aria-hidden', 'true');
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            navItems.forEach(navItem => navItem.classList.remove('active'));
+            
+            this.classList.add('active');
+            
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                const offsetTop = target.offsetTop - 100;
+                window.scrollTo({
+                    top: offsetTop,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
     
     document.addEventListener('click', function(e) {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-            navMenu.setAttribute('aria-hidden', 'true');
-        }
     });
     
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -95,18 +89,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     const sections = document.querySelectorAll('section[id]');
-    const navbar = document.querySelector('.navbar');
+    const floatingNav = document.querySelector('.floating-navbar');
     let isScrolling = false;
     
-    
     function setInitialNavbarBackground() {
-        const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (navbar) {
-            if (isDarkMode) {
-                navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-            } else {
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
-            }
+        if (floatingNav) {
+            console.log('Floating navbar initialized');
         }
     }
     
@@ -118,23 +106,13 @@ document.addEventListener('DOMContentLoaded', function() {
             requestAnimationFrame(() => {
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
-                
-                const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                
-                if (scrollTop > 50) {
-                    if (isDarkMode) {
-                        navbar.style.background = 'rgba(15, 23, 42, 0.9)';
+                if (floatingNav) {
+                    if (scrollTop > 100) {
+                        floatingNav.classList.add('scrolled');
                     } else {
-                        navbar.style.background = 'rgba(255, 255, 255, 0.9)';
-                    }
-                } else {
-                    if (isDarkMode) {
-                        navbar.style.background = 'rgba(15, 23, 42, 0.95)';
-                    } else {
-                        navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                        floatingNav.classList.remove('scrolled');
                     }
                 }
-                
                 
                 const hero = document.querySelector('.hero');
                 const heroContent = document.querySelector('.hero-content');
@@ -143,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     const speed = scrollTop * 0.5;
                     heroContent.style.transform = `translate3d(0, ${speed}px, 0)`;
                 }
-                
                 
                 updateActiveNavLink();
                 
@@ -167,23 +144,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.classList.remove('active');
-            const href = link.getAttribute('href');
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.classList.remove('active');
+            const href = item.getAttribute('href');
             if (href === `#${activeSection}`) {
-                link.classList.add('active');
+                item.classList.add('active');
             }
         });
     }
     
-    
     window.addEventListener('scroll', handleScroll, { passive: true });
     
-    
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
-        
         setInitialNavbarBackground();
-        
         handleScroll();
     });
     
@@ -197,17 +170,14 @@ document.addEventListener('DOMContentLoaded', function() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('fade-in-up');
-                
                 fadeInObserver.unobserve(entry.target);
             }
         });
     }, observerOptions);
     
-    
     document.querySelectorAll('.service-card, .project-card, .tech-item, .stat').forEach(el => {
         fadeInObserver.observe(el);
     });
-    
     
     function typeWriter(element, text, speed = 80) {
         if (!element || !text) return;
@@ -225,12 +195,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }, speed);
     }
     
-    
     const heroName = document.querySelector('.hero-title .name');
     const heroBrand = document.querySelector('.hero-title .brand');
     
     if (heroName && heroBrand) {
-        
         requestAnimationFrame(() => {
             setTimeout(() => {
                 typeWriter(heroName, 'Muhammed Bakhsh', 80);
@@ -241,9 +209,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    
-    
-    
     function animateCounters() {
         const counters = document.querySelectorAll('.stat-number');
         
@@ -251,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const target = parseInt(counter.textContent.replace(/[^\d]/g, ''));
             const symbol = counter.textContent.replace(/[\d]/g, '');
             let count = 0;
-            const increment = target / 30; 
+            const increment = target / 30;
             
             const timer = setInterval(() => {
                 count += increment;
@@ -261,10 +226,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     counter.textContent = target + symbol;
                     clearInterval(timer);
                 }
-            }, 40); 
+            }, 40);
         });
     }
-    
     
     const statsSection = document.querySelector('.about-stats');
     if (statsSection) {
@@ -279,7 +243,6 @@ document.addEventListener('DOMContentLoaded', function() {
         
         statsObserver.observe(statsSection);
     }
-    
     
     const images = document.querySelectorAll('img[loading="lazy"]');
     
@@ -300,7 +263,6 @@ document.addEventListener('DOMContentLoaded', function() {
                             img.style.opacity = '1';
                         }, { once: true });
                         
-                        
                         setTimeout(() => {
                             if (img.style.opacity === '0') {
                                 img.style.opacity = '1';
@@ -318,12 +280,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.blur();
+            });
         }
     });
-    
-    
     
     function initializeContactForm() {
         const form = document.querySelector('#contact-form');
@@ -405,10 +366,9 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('resize', function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(function() {
-            if (window.innerWidth > 768) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
+            console.log('Window resized - floating navbar adjusted');
         }, 250);
     });
+    
+    updateActiveNavLink();
 });

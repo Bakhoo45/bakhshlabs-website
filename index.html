@@ -32,12 +32,11 @@
     <meta property="twitter:image:alt" content="Bakhsh Labs Robot Logo">
     
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), usb=(), bluetooth=()">
     
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'self'">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; font-src 'self' https://cdnjs.cloudflare.com data:; img-src 'self' data: https:; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'">
     
     <meta http-equiv="x-dns-prefetch-control" content="on">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -57,26 +56,26 @@
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-    <nav class="navbar">
+    <nav class="floating-navbar">
         <div class="nav-container">
-            <div class="nav-logo">
-                <a href="#home">
-                    <img src="assets/images/logo.svg" alt="Bakhsh Labs Robot" class="logo-icon" draggable="false" width="32" height="32">
-                    <span>Bakhsh Labs</span>
-                </a>
-            </div>
-            <div class="nav-menu" role="navigation" aria-hidden="false">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#services" class="nav-link">Services</a>
-                <a href="#projects" class="nav-link">Projects</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="hamburger" role="button" aria-label="Toggle navigation menu" aria-expanded="false" tabindex="0">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+            <a href="#home" class="nav-item" data-tooltip="Home">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="#about" class="nav-item" data-tooltip="About">
+                <i class="fas fa-user"></i>
+            </a>
+            <a href="#services" class="nav-item" data-tooltip="Services">
+                <i class="fas fa-cogs"></i>
+            </a>
+            <a href="#projects" class="nav-item" data-tooltip="Projects">
+                <i class="fas fa-folder-open"></i>
+            </a>
+            <a href="#tech-stack" class="nav-item" data-tooltip="Tech Stack">
+                <i class="fas fa-code"></i>
+            </a>
+            <a href="#contact" class="nav-item" data-tooltip="Contact">
+                <i class="fas fa-envelope"></i>
+            </a>
         </div>
     </nav>
 
@@ -344,30 +343,6 @@
             </div>
         </div>
     </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <div class="footer-logo">
-                        <img src="assets/images/logo.svg" alt="Bakhsh Labs Robot" class="footer-logo-icon" draggable="false">
-                        <h3>Bakhsh Labs</h3>
-                    </div>
-                    <p>Automation solutions for the modern world</p>
-                </div>
-                <div class="footer-links">
-                    <a href="#home">Home</a>
-                    <a href="#about">About</a>
-                    <a href="#services">Services</a>
-                    <a href="#projects">Projects</a>
-                    <a href="#contact">Contact</a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Bakhsh Labs. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <script type="application/ld+json">
     {
