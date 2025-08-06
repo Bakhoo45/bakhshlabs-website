@@ -5,6 +5,31 @@
     box-sizing: border-box;
 }
 
+.fas, .fab, .far, .fal, .fad, .fat {
+    font-family: 'Font Awesome 6 Free', 'Font Awesome 6 Brands', 'Font Awesome 6 Pro' !important;
+    font-weight: 900;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.fab {
+    font-family: 'Font Awesome 6 Brands' !important;
+    font-weight: 400;
+}
+
+.service-icon i::before,
+.tech-icon i::before {
+    display: inline-block !important;
+    font-style: normal !important;
+    font-variant: normal !important;
+    text-rendering: auto !important;
+    -webkit-font-smoothing: antialiased !important;
+}
+
 
 .service-card,
 .project-card,
