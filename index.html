@@ -44,12 +44,9 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="96x96" href="assets/images/favicon-96x96.png">
     <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="manifest" href="assets/images/site.webmanifest">
     <meta name="apple-mobile-web-app-title" content="Bakhsh Labs">
     <meta name="application-name" content="Bakhsh Labs">
@@ -59,8 +56,6 @@
 
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" 
           crossorigin="anonymous" 
@@ -432,39 +427,5 @@
     </script>
 
     <script src="assets/js/script.js"></script>
-    
-    
-    <script>
-        
-        if ('fonts' in document) {
-            document.fonts.ready.then(() => {
-                document.body.classList.add('fonts-loaded');
-            });
-        }
-        
-        
-        const criticalImages = [
-            'assets/images/logo.svg',
-            'assets/images/projects/Ai%20Chat%20assistant.png',
-            'assets/images/projects/Ai%20documents%20Assistant.png'
-        ];
-        
-        criticalImages.forEach(src => {
-            const link = document.createElement('link');
-            link.rel = 'preload';
-            link.as = 'image';
-            link.href = src;
-            document.head.appendChild(link);
-        });
-        
-        
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.querySelectorAll('[style*="will-change"]').forEach(el => {
-                    el.style.willChange = 'auto';
-                });
-            }, 3000);
-        });
-    </script>
 </body>
 </html>
