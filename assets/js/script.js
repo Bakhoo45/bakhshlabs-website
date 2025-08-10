@@ -297,12 +297,38 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     initializeContactForm();
+
+    if ('fonts' in document) {
+        document.fonts.ready.then(() => {
+            document.body.classList.add('fonts-loaded');
+        });
+    }
+
+    const criticalImages = [
+        'assets/images/apple-touch-icon.png',
+        'assets/images/projects/Ai%20Chat%20assistant.png',
+        'assets/images/projects/Ai%20documents%20Assistant.png'
+    ];
+
+    criticalImages.forEach(src => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = src;
+        document.head.appendChild(link);
+    });
     
     window.addEventListener('load', function() {
         const loadTime = performance.now();
         console.log(`Page loaded in ${Math.round(loadTime)}ms`);
         
         document.body.classList.add('loaded');
+
+        setTimeout(() => {
+            document.querySelectorAll('[style*="will-change"]').forEach(el => {
+                el.style.willChange = 'auto';
+            });
+        }, 3000);
     });
     
     const failedImages = new Set();
